@@ -2,9 +2,7 @@
 <html lang="gu">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Manoj Photo Rush Pro</title>
-
     <style>
         :root {
             --primary: #facc15;
@@ -95,7 +93,7 @@
     <div id="game-screen" class="screen">
         <div class="stats stats-left">
             <div style="color:var(--primary); font-size:28px; font-weight:bold;">Score: <span id="score">0</span></div>
-            <div style="color:var(--danger)">Lives: <span id="lives">20</span></div>
+            <div style="color:var(--danger)">Lives: <span id="lives">10</span></div>
         </div>
         <div class="stats stats-right">
             <div style="color:#4ade80; font-size:20px;">Record: <span id="game-high-score">0</span></div>
@@ -116,7 +114,7 @@
 
     <script>
         const userImg = "photo.jpg";
-        let score = 0, lives = 20, gameActive = false, gameTimer;
+        let score = 0, lives = 10, gameActive = false, gameTimer;
         let highScore = localStorage.getItem('photoProScore') || 0;
 
         // Initialize High Scores
@@ -124,9 +122,9 @@
         document.getElementById('game-high-score').innerText = highScore;
 
         function startGame() {
-            score = 0; lives = 20; gameActive = true;
+            score = 0; lives = 10; gameActive = true;
             document.getElementById('score').innerText = "0";
-            document.getElementById('lives').innerText = "20";
+            document.getElementById('lives').innerText = "10";
             document.getElementById('home-screen').style.display = 'none';
             document.getElementById('game-over-screen').style.display = 'none';
             document.getElementById('game-screen').style.display = 'flex';
@@ -191,27 +189,7 @@
                 }
             }, 20);
 
-            function handleClick(e) {
-    e.stopPropagation();
-    if (isBomb) endGame("Never Click on Bombs 💥");
-    else {
-        score++;
-        document.getElementById('score').innerText = score;
-        item.remove();
-        clearInterval(fall);
-
-        if (score > highScore) {
-            highScore = score;
-            localStorage.setItem('photoProScore', highScore);
-            document.getElementById('game-high-score').innerText = highScore;
-        }
-        updateDifficulty();
-    }
-}
-
-item.onmousedown = handleClick;
-item.ontouchstart = handleClick;
-
+            item.onmousedown = (e) => {
                 e.stopPropagation();
                 if (isBomb) endGame("Never Click on Bombs 💥");
                 else {
