@@ -119,6 +119,40 @@
     </div>
 
     <script>
+        window.onload = function() {
+
+    const userImg = "./photo.jpg";
+    let score = 0, lives = 10, gameActive = false, gameTimer;
+    let highScore = localStorage.getItem('photoProScore') || 0;
+
+    document.getElementById('home-high-score').innerText = highScore;
+    document.getElementById('game-high-score').innerText = highScore;
+
+    function startGame() {
+        score = 0; lives = 10; gameActive = true;
+        document.getElementById('score').innerText = "0";
+        document.getElementById('lives').innerText = "10";
+        document.getElementById('home-screen').style.display = 'none';
+        document.getElementById('game-over-screen').style.display = 'none';
+        document.getElementById('game-screen').style.display = 'flex';
+        document.getElementById('game-area').innerHTML = '';
+        updateDifficulty();
+    }
+
+    window.startGame = startGame; // 👈 VERY IMPORTANT
+
+    function goHome() {
+        document.getElementById('game-over-screen').style.display = 'none';
+        document.getElementById('game-screen').style.display = 'none';
+        document.getElementById('home-screen').style.display = 'flex';
+        document.getElementById('home-high-score').innerText = highScore;
+    }
+
+    window.goHome = goHome;
+
+    // keep rest of your code same...
+};
+
         const userImg = "./photo.jpg";
 
         let score = 0, lives = 10, gameActive = false, gameTimer;
